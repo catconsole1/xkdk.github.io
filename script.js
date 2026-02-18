@@ -14,7 +14,7 @@ function loadCategory(category) {
     const gallery = document.getElementById("gallery");
     gallery.innerHTML = "";
 
-    for (let i = 1; i <= 50; i++) {
+    for (let i = 1; i <= 100; i++) {
         const id = `${category}${i}`;
         const imgPath = `image/${category}/${id}.png`;
 
@@ -54,4 +54,5 @@ function openModal(src) {
 function closeModal() {
     document.getElementById("modal").style.display = "none";
 }
+
 
