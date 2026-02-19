@@ -6,7 +6,7 @@
 
 <style>
 body{
-    font-family: Arial;
+    font-family: Arial, sans-serif;
     background:#111;
     color:white;
     margin:0;
@@ -17,130 +17,48 @@ h1{
     text-align:center;
 }
 
-#newsList{
+.news-container{
     max-width:800px;
     margin:20px auto;
 }
 
 .news{
-    background:#222;
-    padding:15px;
-    margin-bottom:10px;
-    border-radius:8px;
-}
-
-button{
-    padding:10px 15px;
-    border:none;
-    border-radius:6px;
-    cursor:pointer;
-}
-
-#adminBtn{
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    background:#ff4d6d;
-    color:white;
-}
-
-#adminPanel{
-    display:none;
-    max-width:800px;
-    margin:20px auto;
-    background:#1a1a1a;
+    background:#1c1c1c;
     padding:20px;
+    margin-bottom:15px;
     border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.5);
 }
 
-input, textarea{
-    width:100%;
-    padding:10px;
-    margin:10px 0;
-    border-radius:6px;
-    border:none;
+.news h3{
+    margin-top:0;
+    color:#ff4d6d;
 }
 
+a{
+    color:#4da6ff;
+}
 </style>
 </head>
 <body>
 
 <h1>News</h1>
 
-<div id="newsList"></div>
+<div class="news-container">
 
-<button id="adminBtn" onclick="login()">Admin</button>
+    <!-- NEWS BLOCK -->
+    <div class="news">
+        <h3>Site Mirror Coming Soon</h3>
+        <p>
+        We will soon launch a mirror of our website.<br><br>
 
-<div id="adminPanel">
-    <h2>Add News</h2>
-    <input id="title" placeholder="Title">
-    <textarea id="content" placeholder="Content"></textarea>
-    <button onclick="addNews()">Publish</button>
+        Main site: <a href="https://pezda.site" target="_blank">https://pezda.site</a><br>
+        Mirror: <a href="https://nigers.fun" target="_blank">https://nigers.fun</a><br>
+        My Telegram: @kotconsole
+        </p>
+    </div>
+
 </div>
-
-<script>
-
-const PASSWORD_HASH = "a6b0c9f33f0e6c9e6b4b4d7c6e0d6a78e3d8c7a2b1c0a5c3c1b6a0c7f2a1d8e9";
-
-async function sha256(text){
-  const encoder = new TextEncoder();
-  const data = encoder.encode(text);
-  const hash = await crypto.subtle.digest("SHA-256", data);
-  return Array.from(new Uint8Array(hash))
-    .map(b => b.toString(16).padStart(2,"0"))
-    .join("");
-}
-
-async function login(){
-    const pass = prompt("Enter admin password");
-    const hash = await sha256(pass);
-
-    if(hash === PASSWORD_HASH){
-        document.getElementById("adminPanel").style.display="block";
-    } else {
-        alert("Wrong password");
-    }
-}
-
-// 📦 загрузка новостей
-const news = JSON.parse(localStorage.getItem("news") || "[]");
-
-function saveNews(){
-    localStorage.setItem("news", JSON.stringify(news));
-}
-
-function renderNews(){
-    const list = document.getElementById("newsList");
-    list.innerHTML="";
-
-    news.slice().reverse().forEach(n=>{
-        const div=document.createElement("div");
-        div.className="news";
-        div.innerHTML=`<h3>${n.title}</h3><p>${n.content}</p>`;
-        list.appendChild(div);
-    });
-}
-
-function addNews(){
-    const title=document.getElementById("title").value;
-    const content=document.getElementById("content").value;
-
-    if(!title || !content){
-        alert("Fill all fields");
-        return;
-    }
-
-    news.push({title, content});
-    saveNews();
-    renderNews();
-
-    document.getElementById("title").value="";
-    document.getElementById("content").value="";
-}
-
-renderNews();
-
-</script>
 
 </body>
 </html>
