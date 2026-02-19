@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>News</title>
+
+<style>
+body{
+    font-family: Arial;
+    background:#111;
+    color:white;
+    margin:0;
+    padding:20px;
+}
+
+h1{
+    text-align:center;
+}
+
+#newsList{
+    max-width:800px;
+    margin:20px auto;
+}
+
+.news{
+    background:#222;
+    padding:15px;
+    margin-bottom:10px;
+    border-radius:8px;
+}
+
+button{
+    padding:10px 15px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+#adminBtn{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#ff4d6d;
+    color:white;
+}
+
+#adminPanel{
+    display:none;
+    max-width:800px;
+    margin:20px auto;
+    background:#1a1a1a;
+    padding:20px;
+    border-radius:10px;
+}
+
+input, textarea{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border-radius:6px;
+    border:none;
+}
+
+</style>
+</head>
+<body>
+
+<h1>News</h1>
+
+<div id="newsList"></div>
+
+<button id="adminBtn" onclick="login()">Admin</button>
+
+<div id="adminPanel">
+    <h2>Add News</h2>
+    <input id="title" placeholder="Title">
+    <textarea id="content" placeholder="Content"></textarea>
+    <button onclick="addNews()">Publish</button>
+</div>
+
+<script>
+
+const PASSWORD_HASH = "3a4f0b9b3e6b4f8b5a0e4f9c8e2f52c6c1a6c7c6c2e5d9d1e7f5a3a9c6b1d2e4";
+
+async function sha256(text){
+  const encoder = new TextEncoder();
+  const data = encoder.encode(text);
+  const hash = await crypto.subtle.digest("SHA-256", data);
+  return Array.from(new Uint8Array(hash))
+    .map(b => b.toString(16).padStart(2,"0"))
+    .join("");
+}
+
+async function login(){
+    const pass = prompt("Enter admin password");
+    const hash = await sha256(pass);
+
+    if(hash === PASSWORD_HASH){
+        document.getElementById("adminPanel").style.display="block";
+    } else {
+        alert("Wrong password");
+    }
+}
+
+// 📦 загрузка новостей
+const news = JSON.parse(localStorage.getItem("news") || "[]");
+
+function saveNews(){
+    localStorage.setItem("news", JSON.stringify(news));
+}
+
+function renderNews(){
+    const list = document.getElementById("newsList");
+    list.innerHTML="";
+
+    news.slice().reverse().forEach(n=>{
+        const div=document.createElement("div");
+        div.className="news";
+        div.innerHTML=`<h3>${n.title}</h3><p>${n.content}</p>`;
+        list.appendChild(div);
+    });
+}
+
+function addNews(){
+    const title=document.getElementById("title").value;
+    const content=document.getElementById("content").value;
+
+    if(!title || !content){
+        alert("Fill all fields");
+        return;
+    }
+
+    news.push({title, content});
+    saveNews();
+    renderNews();
+
+    document.getElementById("title").value="";
+    document.getElementById("content").value="";
+}
+
+renderNews();
+
+</script>
+
+</body>
+</html>
