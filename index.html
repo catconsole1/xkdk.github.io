@@ -3,33 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>18+ Gallery</title>
+
+<title>Luvion</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="style.css">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #0f0f0f;
+  color: white;
+}
+
+header {
+  text-align: center;
+  padding: 20px;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.menu button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #1f1f1f;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 500;
+}
+
+.menu button:hover {
+  background: #ff2e88;
+}
+
+.gallery {
+  padding: 20px;
+}
+
+.modal {
+  display: none;
+}
+</style>
+
 </head>
 <body>
 
-<div id="ageGate" class="age-gate">
-  <div class="age-box">
-    <h2>🔞 Подтверждение возраста</h2>
-    <p>
-      Вы соглашаетесь, что вам исполнилось 18 лет или больше,
-      и что вы достигли совершеннолетия в соответствии с законами вашей страны.
-    </p>
-    <p>
-      Продолжая использование сайта, вы подтверждаете, что просмотр
-      контента для взрослых разрешён в вашей юрисдикции.
-    </p>
-
-    <div class="age-buttons">
-      <button class="accept" onclick="acceptAge()">Мне есть 18</button>
-      <button class="decline" onclick="declineAge()">Мне нет 18</button>
-    </div>
-  </div>
-</div>
-
-
 <header>
-<h1>18+ Gallery</h1>
+<h1>Luvion</h1>
 </header>
 
 <nav class="menu">
@@ -49,4 +81,3 @@
 <script src="script.js"></script>
 </body>
 </html>
-
