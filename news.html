@@ -4,9 +4,11 @@
 <meta charset="UTF-8">
 <title>News</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
 body{
-    font-family: Inter, Arial, sans-serif;
+    font-family: 'Inter', Arial, sans-serif;
     background:#0f0f14;
     color:white;
     margin:0;
@@ -35,12 +37,10 @@ h1{
     margin-bottom:30px;
 }
 
-
 .news-container{
     max-width:800px;
     margin:auto;
 }
-
 
 .news{
     background:rgba(255,255,255,0.03);
@@ -50,13 +50,19 @@ h1{
     margin-bottom:20px;
     backdrop-filter:blur(10px);
     transition:.25s;
+
+    opacity:0;
+    transform:translateY(30px);
+    animation:fadeUp .6s ease forwards;
 }
+
+.news:nth-child(1){ animation-delay:.1s }
+.news:nth-child(2){ animation-delay:.25s }
 
 .news:hover{
-    transform:translateY(-4px);
+    transform:translateY(-6px) scale(1.01);
     box-shadow:0 20px 40px rgba(0,0,0,0.5);
 }
-
 
 .author{
     display:flex;
@@ -91,7 +97,6 @@ h1{
     margin-top:2px;
 }
 
-
 .news h3{
     margin:10px 0;
     color:#ff4d6d;
@@ -105,14 +110,15 @@ a{
     color:#4da6ff;
 }
 
-
-@media(max-width:600px){
-    body{padding:15px}
-    .news{padding:16px}
+@keyframes fadeUp{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
-
 </style>
 </head>
+
 <body>
 
 <a class="back-btn" href="index.html">⬅ Back to site</a>
@@ -121,6 +127,32 @@ a{
 
 <div class="news-container">
 
+    <!-- VPS НОВОСТЬ ПЕРВАЯ -->
+    <div class="news">
+
+        <div class="author">
+            <img src="avatar.jpg">
+            <div class="author-info">
+                <div class="author-name">CatConsole</div>
+                <div class="role">Admin</div>
+            </div>
+        </div>
+
+        <h3>Infrastructure Upgrade</h3>
+
+        <p>
+        We have purchased a VPS server and a domain for our website.<br><br>
+
+        The website will be hosted in Finland to ensure better stability,
+        speed, and privacy for our users.<br><br>
+
+        Mirror: <a href="https://luvion.site/" target="_blank">https://luvion.site/</a><br>
+        Main: <a href="https://pezda.site/" target="_blank">https://pezda.site/</a>
+        </p>
+
+    </div>
+
+    <!-- ВТОРАЯ НОВОСТЬ -->
     <div class="news">
 
         <div class="author">
