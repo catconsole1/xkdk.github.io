@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сайт переезжает</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            width: 100%;
+            font-family: 'Segoe UI', 'Arial Black', 'Helvetica Neue', sans-serif;
+            overflow: hidden; /* убираем скролл, чтобы фон был цельным */
+        }
+
+        /* Контейнер с фоновым изображением и размытием */
+        .background {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-image: url('rkn1.png'); /* ваше изображение */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            /* Само размытие фона — через псевдоэлемент, чтобы текст оставался чётким */
+        }
+
+        .background::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(12px);        /* размытие заднего плана */
+            -webkit-backdrop-filter: blur(12px); /* для Safari */
+            background-color: rgba(0, 0, 0, 0.2); /* легкое затемнение для читаемости */
+            z-index: 1;
+        }
+
+        /* Контент поверх размытого фона */
+        .content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            color: white;
+            text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Огромный шрифт для главной строки */
+        .main-message {
+            font-size: clamp(4rem, 15vw, 12rem); /* адаптивный размер: от 4rem до 12rem в зависимости от ширины экрана */
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            word-break: break-word;
+            color: #fff;
+            animation: smoothAppear 0.8s ease-out;
+        }
+
+        /* Стиль для ссылок */
+        .links {
+            font-size: clamp(2rem, 6vw, 4.5rem);
+            font-weight: 700;
+            margin: 20px 0;
+            word-break: break-word;
+            background: linear-gradient(135deg, #ffe99c, #ffd27f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+        }
+
+        .links a {
+            color: inherit;
+            text-decoration: none;
+            border-bottom: 4px solid rgba(255, 215, 0, 0.6);
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .links a:hover {
+            border-bottom-color: gold;
+            filter: drop-shadow(0 0 15px #ffbb00);
+        }
+
+        /* Контактная информация чуть меньшим, но всё ещё крупным шрифтом */
+        .contact {
+            font-size: clamp(1.4rem, 4vw, 2.8rem);
+            font-weight: 600;
+            margin-top: 40px;
+            padding: 15px 30px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            border-radius: 60px;
+            border: 1px solid rgba(255,255,255,0.3);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            line-height: 1.5;
+        }
+
+        .contact a {
+            color: #ffd966;
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 2px dotted rgba(255, 255, 255, 0.5);
+        }
+
+        .contact a:hover {
+            color: #fff2b5;
+            border-bottom: 2px solid gold;
+        }
+
+        /* Анимация появления */
+        @keyframes smoothAppear {
+            0% { opacity: 0; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Маленькая подсказка про картинку, если вдруг её нет (можно убрать) */
+        .watermark-note {
+            position: absolute;
+            bottom: 8px;
+            right: 15px;
+            z-index: 3;
+            color: rgba(255,255,255,0.3);
+            font-size: 0.9rem;
+            pointer-events: none;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="content">
+            <div class="main-message">
+                САЙТ ПЕРЕЕЗЖАЕТ<br>НА НОВЫЙ
+            </div>
+            <div class="links">
+                <a href="https://luvion.site" target="_blank" rel="noopener noreferrer">luvion.site</a><br>
+                <span style="font-size: 0.7em; line-height: 1.4; display: block; margin: 10px 0 5px;">или</span>
+                <a href="https://luvionmirror.site" target="_blank" rel="noopener noreferrer">luvionmirror.site</a>
+            </div>
+            <div class="contact">
+                📧 <a href="mailto:admin@catconsole.ru">admin@catconsole.ru</a><br>
+                💬 Telegram: <a href="https://t.me/kotconsole" target="_blank">@kotconsole</a>
+            </div>
+        </div>
+        <!-- просто напоминание про файл rkn1.png, можно удалить без последствий -->
+        <div class="watermark-note">фон: rkn1.png (blurred)</div>
+    </div>
+</body>
+</html>
